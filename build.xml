@@ -1,0 +1,75 @@
+<project name="shun" default="dist" basedir=".">
+
+  <property name="project.name" value="shun"/>
+
+  <!-- catalina (tomcat 5) setup -->
+  <property name="webserver.home" value="/home/gyo/tomcat"/>
+  <property name="webserver.deploy" value="${webserver.home}/webapps"/>
+  <property name="servlet.jar" value="${webserver.home}/common/lib/servlet-api.jar"/>
+
+  <!-- jboss 4.0.2/catalina (tomcat 5) setup -->
+  <property name="webserver.home" value="/usr/local/jboss4/server/default"/>
+  <property name="webserver.deploy" value="${webserver.home}/deploy"/>
+  <property name="servlet.jar" value="${webserver.home}/lib/javax.servlet.jar"/>
+
+  <!-- project structure - should not have to modify -->
+  <property name="src.dir" value="src"/>
+  <property name="web.dir" value="."/>
+  <property name="build.dir" value="WEB-INF/classes"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="lib.dir" value="WEB-INF/lib"/>
+
+  <!-- CLASSPATH used during compilation -->
+  <path id="build.classpath">
+    <pathelement location="${servlet.jar}"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <pathelement path="${build.dir}"/>
+  </path>
+
+  <!-- Pre-compilation rule -->
+  <target name="prepare">
+    <tstamp/>
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${dist.dir}" />
+  </target>
+
+  <!-- Compiling rule -->
+  <target name="compile" depends="prepare">
+    <javac destdir="${build.dir}" debug="on" deprecation="on">
+      <classpath refid="build.classpath" />
+      <src path="${src.dir}" />
+    </javac>
+  </target>
+
+  <!-- WAR rules -->
+  <target name="dist" depends="compile">
+    <echo>building war...</echo>
+    <copy file="${src.dir}/log4j.xml" todir="${build.dir}"/>
+    <copy file="${src.dir}/MessageResources.properties" todir="${build.dir}"/>
+    <war destfile="${dist.dir}/${project.name}.war" webxml="WEB-INF/web.xml">
+      <fileset dir="${web.dir}" excludes="WEB-INF/web.xml, ${dist.dir}, ${src.dir}, build.xml"/>
+    </war>
+  </target>
+
+  <!-- Deploy rule -->
+  <target name="deploy" depends="dist">
+    <echo>copying war file to deployment dir...</echo>
+    <delete dir="${webserver.deploy}/${project.name}"/>
+    <copy file="${dist.dir}/lib/${project.name}.war" todir="${webserver.deploy}"/>
+  </target>
+
+  <!-- clean compilation remnants -->
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <!-- completely clean all compilation results -->
+  <target name="distclean">
+    <antcall target="clean"/>
+    <delete dir="${dist.dir}"/>
+  </target>
+
+</project>
+

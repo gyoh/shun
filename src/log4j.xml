@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </layout>        
+    </appender>
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="../logs/album.log" />
+        <param name="append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p (%F:%L) - %m%n"/>
+        </layout>        
+    </appender>
+    <category name="org.hamamoto.album">
+        <priority value ="WARN" />
+        <appender-ref ref="FILE" />
+    </category>
+    <root>
+        <priority value ="WARN" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+</log4j:configuration>

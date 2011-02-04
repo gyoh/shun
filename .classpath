@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/antlr.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-digester.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-fileupload.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-validator.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/db4o-4.5-java1.4.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jakarta-oro.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/struts.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/metadata-extractor-2.3.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>
